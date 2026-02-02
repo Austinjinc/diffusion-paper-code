@@ -70,7 +70,7 @@ class Trainer:
             self.mean_log_torch = torch.from_numpy(norm_stats['mean']).to(self.device)
             self.std_log_torch = torch.from_numpy(norm_stats['std']).to(self.device)
             
-        self.penalty_fn = ArbitragePenalties(self.device)
+        self.penalty_fn = ArbitragePenalties(self.device, taus=ttm_grid)
         self.lambda_smile = trial.suggest_float("lambda_smile", 1.4, 15, log=True) if trial else 0.01
         self.lambda_ttm = trial.suggest_float("lambda_ttm", 1, 15, log=True) if trial else 0.01
 
